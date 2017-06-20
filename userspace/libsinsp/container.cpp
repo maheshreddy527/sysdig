@@ -527,6 +527,14 @@ bool sinsp_container_manager::resolve_container(sinsp_threadinfo* tinfo, bool qu
 		}
 	}
 
+	//
+	// If this is the PID 1 of a coontainer, keep track of it
+	//
+	if(tinfo->m_vtid == 1 && !tinfo->m_container_id.empty())
+	{
+		m_inspector->m_thread_manager->add_init_thread(tinfo);
+	}
+
 	return valid_id;
 }
 
